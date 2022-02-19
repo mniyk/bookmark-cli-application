@@ -58,7 +58,7 @@ class Bookmarks:
             path (str): 出力先パス
 
         Examples:
-            >>>
+            >>> books.output('bookmarks.json')
         """
         books = [
             {'url': book.url, 'title': book.title, 'tag': book.tag} 
@@ -66,3 +66,19 @@ class Bookmarks:
 
         with open(path, 'w') as f:
             json.dump(books, f, indent=4, ensure_ascii=False)
+
+    def read_json(self, path: str):
+        """BookmatksのJSONファイルを読み込み
+
+        Args:
+            path (str): 読込元パス
+
+        Examples:
+            >>> books.read_json('bookmarks.json')
+        """
+        with open(path, 'r') as f:
+            data = json.load(f)
+
+        self.books = [
+            Bookmark(url=book['url'], title=book['title'], tag=book['tag'])
+            for book in data]

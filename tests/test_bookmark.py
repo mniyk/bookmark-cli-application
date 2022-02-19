@@ -54,3 +54,16 @@ class TestBookmark(unittest.TestCase):
         self.books.output('bookmarks.json')
 
         os.remove('bookmarks.json')
+
+
+    def test_read_json(self):
+        self.books.add(book=self.book1)
+        self.books.add(book=self.book2)
+
+        self.books.output('bookmarks.json')
+
+        self.books.read_json('bookmarks.json')
+
+        self.assertEqual(len(self.books.books), 2)
+
+        os.remove('bookmarks.json')
