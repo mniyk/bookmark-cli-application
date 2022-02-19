@@ -1,5 +1,6 @@
 """ブックマークのモジュール
 """
+import json
 from typing import List
 
 
@@ -49,3 +50,19 @@ class Bookmarks:
 
         if not is_add:
             self.books.append(book)
+
+    def output(self, path: str):
+        """Bookmarksの出力
+
+        Args:
+            path (str): 出力先パス
+
+        Examples:
+            >>>
+        """
+        books = [
+            {'url': book.url, 'title': book.title, 'tag': book.tag} 
+            for book in self.books]
+
+        with open(path, 'w') as f:
+            json.dump(books, f, indent=4, ensure_ascii=False)

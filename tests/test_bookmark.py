@@ -1,6 +1,7 @@
 """bookmark.pyのunittest
 """
 import logging
+import os
 import unittest
 
 import bookmark
@@ -22,22 +23,34 @@ logger = logging.Logger(__name__)
 
 
 class TestBookmark(unittest.TestCase):
+    def setUp(self) -> None:
+        self.books = bookmark.Bookmarks()
+
+        self.book1 = bookmark.Bookmark(
+            url='test1', title='test1', tag=['test1'])
+        self.book2 = bookmark.Bookmark(
+            url='test2', title='test2', tag=['test2'])
+
+
     def test_create_bookmark(self):
         book = bookmark.Bookmark(url='test', title='test', tag=['test'])
 
         print(book)
 
     def test_add_bookmarks(self):
-        books = bookmark.Bookmarks()
+        self.books.add(book=self.book1)
+        self.books.add(book=self.book1)
 
-        book1 = bookmark.Bookmark(url='test1', title='test1', tag=['test1'])
-        book2 = bookmark.Bookmark(url='test2', title='test2', tag=['test2'])
+        self.assertEqual(len(self.books.books), 1)
 
-        books.add(book=book1)
-        books.add(book=book1)
+        self.books.add(book=self.book2)
 
-        self.assertEqual(len(books.books), 1)
+        self.assertEqual(len(self.books.books), 2)
 
-        books.add(book=book2)
+    def test_output_bookmarks(self):
+        self.books.add(book=self.book1)
+        self.books.add(book=self.book2)
 
-        self.assertEqual(len(books.books), 2)
+        self.books.output('bookmarks.json')
+
+        os.remove('bookmarks.json')
