@@ -40,16 +40,38 @@ class Bookmarks:
             >>> book = Bookmark(url='test', title='test', tag=['test'])
             >>> books.add(book=book)
         """
-        is_add = False
+        is_add = True
 
         for b in self.books:
             if b.url == book.url:
-                is_add = True
+                is_add = False
 
                 break
 
-        if not is_add:
+        if is_add:
             self.books.append(book)
+
+    def delete(self, url: str):
+        """Bookmarkの削除
+
+        Args:
+            url (str): URL
+
+        Examples:
+            >>> books.delete(url='test')
+        """
+        is_delete = False
+        target = None
+
+        for i, b in enumerate(self.books):
+            if b.url == url:
+                is_delete = True
+                target = i
+
+                break
+        
+        if is_delete:
+            self.books.pop(target)
 
     def output(self, path: str):
         """Bookmarksの出力

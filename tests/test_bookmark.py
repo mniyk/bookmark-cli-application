@@ -47,6 +47,16 @@ class TestBookmark(unittest.TestCase):
 
         self.assertEqual(len(self.books.books), 2)
 
+    def test_delete_bookmarks(self):
+        self.books.add(book=self.book1)
+        self.books.add(book=self.book2)
+
+        self.assertEqual(len(self.books.books), 2)
+
+        self.books.delete(url='test1')
+
+        self.assertEqual(len(self.books.books), 1)
+
     def test_output_bookmarks(self):
         self.books.add(book=self.book1)
         self.books.add(book=self.book2)
