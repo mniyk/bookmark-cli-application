@@ -18,3 +18,8 @@ class Bookmark:
         self.url = url
         self.title = title
         self.tag = tag
+
+
+class Bookmarks:
+    def __init__(self) -> None:
+        books = None
