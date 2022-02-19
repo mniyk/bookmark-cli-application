@@ -26,3 +26,18 @@ class TestBookmark(unittest.TestCase):
         book = bookmark.Bookmark(url='test', title='test', tag=['test'])
 
         print(book)
+
+    def test_add_bookmarks(self):
+        books = bookmark.Bookmarks()
+
+        book1 = bookmark.Bookmark(url='test1', title='test1', tag=['test1'])
+        book2 = bookmark.Bookmark(url='test2', title='test2', tag=['test2'])
+
+        books.add(book=book1)
+        books.add(book=book1)
+
+        self.assertEqual(len(books.books), 1)
+
+        books.add(book=book2)
+
+        self.assertEqual(len(books.books), 2)
